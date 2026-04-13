@@ -1,0 +1,59 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Job Posting',
+    typeNamePlural: 'Job Postings',
+    title: { type: #STANDARD, value: 'JobTitle' }
+  }
+}
+annotate view Z36_C_JOBPOST with 
+{
+  @UI.facet: [
+    { id: 'JobDetails',
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Job Details',
+      position: 10 },
+
+    { id: 'Applications',
+      type: #LINEITEM_REFERENCE,
+      label: 'Applications',
+      position: 20,
+      targetElement: '_Applications' }
+  ]
+
+  @UI.hidden: true
+  JobId;
+
+  @UI: { lineItem:       [ { position: 10, label: 'Job Title' } ],
+         identification: [ { position: 10, label: 'Job Title' } ],
+         selectionField: [ { position: 10 } ] }
+  JobTitle;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Location' } ],
+         identification: [ { position: 20, label: 'Location' } ],
+         selectionField: [ { position: 20 } ] }  
+  Location;
+
+  @UI: { identification: [ { position: 30, label: 'Job Description' } ] }
+  JobDescription;
+
+  @UI: { lineItem:       [ { position: 40, label: 'Salary' } ],
+         identification: [ { position: 40, label: 'Salary' } ] }
+  SalaryRange;
+
+ 
+  @UI: { lineItem:       [ { position: 45, label: 'Currency' } ],
+         identification: [ { position: 45, label: 'Currency' } ] }
+  CurrencyCode;
+
+  
+  @UI: { lineItem:       [ { position: 50, label: 'Status' } ],
+         identification: [ { position: 50, label: 'Status' } ] }
+  Status;
+
+  @UI: { identification: [ { position: 60, label: 'Created By' } ] }
+  CreatedBy;
+
+  @UI: { identification: [ { position: 70, label: 'Created On' } ] }
+  CreatedAt;
+}

@@ -1,0 +1,44 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Application',
+    typeNamePlural: 'Applications',
+    title: { type: #STANDARD, value: 'CandidateName' }
+  }
+}
+annotate view Z36_C_JOBAPPL with  
+{
+  @UI.facet: [
+    { id: 'AppDetails',
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Candidate Info',
+      position: 10 }
+  ]
+
+  @UI.hidden: true
+  AppId;
+
+  @UI.hidden: true
+  JobId;
+
+  @UI: { lineItem:       [ { position: 10, label: 'Candidate Name' } ],
+         identification: [ { position: 10, label: 'Candidate Name' } ] }
+  CandidateName;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Email Address' } ],
+         identification: [ { position: 20, label: 'Email Address' } ] }
+  Email;
+
+ 
+  @UI: { lineItem:       [ { position: 30, label: 'Phone' } ],
+         identification: [ { position: 30, label: 'Phone' } ] }
+  Phone;
+
+  @UI: { lineItem:       [ { position: 40, label: 'Status' } ],
+         identification: [ { position: 40, label: 'Status' } ] }
+  AppStatus;
+
+  @UI: { lineItem:       [ { position: 50, label: 'Applied On' } ],
+         identification: [ { position: 50, label: 'Applied On' } ] }
+  AppliedAt;
+}

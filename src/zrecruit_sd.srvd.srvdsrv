@@ -1,0 +1,5 @@
+@EndUserText.label: 'SERVICE DEFINITION'
+define service ZRECRUIT_SD {
+  expose Z36_C_JOBPOST as Job;
+  expose Z36_C_JOBAPPL as Applications;
+}

@@ -1,0 +1,67 @@
+unmanaged implementation in class zbp_36_i_jobpost unique;
+strict ( 2 );
+with draft;
+
+define behavior for Z36_I_JOBPOST alias Job
+lock master
+total etag LastChangedAt
+authorization master ( global, instance )
+etag master LastChangedAt
+draft table z36_job_post_d
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  association _Applications { create; with draft; }
+
+  field ( readonly, numbering : managed ) JobId;
+
+  mapping for z36_job_post
+  {
+    JobId = job_id;
+    JobTitle = job_title;
+    JobDescription = job_description;
+    Location = location;
+    SalaryRange = salary_range;
+    CurrencyCode = currency_code;
+    Status = status;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedAt = last_changed_at;
+  }
+}
+
+define behavior for Z36_I_JOBAPPL alias Application
+lock dependent by _Job  // Fixed: Points to Alias 'Job'
+authorization dependent by _Job
+etag master LastChangedAt
+draft table z36_job_appl_d
+{
+  update;
+  delete;
+
+  field ( readonly ) AppId;
+  field ( readonly ) JobId, AppliedAt, LastChangedAt;
+
+  association _Job { with draft; }
+
+  mapping for z36_job_appl
+  {
+    AppId = app_id;
+    JobId = job_id;
+    CandidateName = candidate_name;
+    Email = email;
+    Phone = phone;
+    ResumeUrl = resume_url;
+    AppStatus = app_status;
+    AppliedAt = applied_at;
+    LastChangedAt = last_changed_at;
+  }
+}

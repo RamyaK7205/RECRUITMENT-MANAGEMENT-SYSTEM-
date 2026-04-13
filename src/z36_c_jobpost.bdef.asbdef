@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for Z36_C_JOBPOST alias Job
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _Applications { create; with draft; }
+}
+
+define behavior for Z36_C_JOBAPPL alias Application
+{
+  use update;
+  use delete;
+
+  use association _Job { with draft; }
+}
